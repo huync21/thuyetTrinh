@@ -1,0 +1,66 @@
+I.Giới thiệu
+- file văn bản và file nhị phân (text file và binary file)
+	+ file văn bản là những file có thể truy cập được bằng các text
+editor như notepad, visual studio code,...
+	+ file nhị phân là những file được thiết kế để chỉ đọc được bởi
+các chương trình, ko thể đọc bằng các text editor
+Ví dụ ảnh: các file java source là những file text(.java), nhưng các file
+Java class (.class) là những file nhị phân và được đọc bởi JVM
+
+- tại sao cần vào ra nhị phân(binary I/O) vì nó hiệu quả hơn cho việc
+truy nhập so với các file dạng text( hiệu quả hơn như nào nói sau)
+
+- Để vào\ra thì ta cần 1 luồng để vào\ra, luồng chính là 1 đối tượng. (ảnh 1)
+
+- Trước đó trong bài thực hành số ta đã sử dụng lớp Scanner và PrinWriter để tạo ra 
+các đối tượng luồng để đọc ghi từ các file văn bản(các file .INP và.OUT), bây h ta sẽ đi tìm hiểu về vào ra 
+nhị phân Binary I/O
+
+II. Text I/O vs Binary I/O
+- text I/O thì cần phải có thêm quá trình giải mã và mã hóa, nên
+bị chậm hơn Binary I/O (ảnh 2)
+
+III. Binary I/O classes
+- 2 class trừu tượng InputStream và OutputStream, cùng các class con(dẫn xuất)
+có thêm các chức năng( ảnh 3)
+- Ta ko cần phải học hết các class, nắm chắc 2 class InputStream và OutputStream
+cùng 1 vài hàm cơ bản là được (ảnh 4 + ảnh 5)
+
+IV. FileInputStream/FileOutputStream
+- Đọc ghi các bytes ra file( ảnh 6)
+
+V. FilterInputStream/FilterOutputStream
+- bình thường input stream chỉ có hàm read() để đọc từng bytes, bây h nếu muốn đọc ghi các
+kiểu dữ liệu kiểu int, double, string các thứ thì ta cần filter class để bọc byte input stream
+
+VI. DataInputStream/DataOutputStream
+- là class con của filterInputStream
+- hỗ trợ các phương thức để đọc ghi các dạng dữ liệu nguyên thủy int, double, char, đọc ghi String
+- ảnh 7.0,7,8
+
+VII.BufferInputStream/BufferOutputStream
+- là class con của filterInpuStream
+- khi tốc độ đọc ghi của chương trình và tốc độ đọc ghi của tài nguyên bị khác nhau,
+=> tốc độ đọc ghi sẽ bị chậm
+(ví dụ: - có 2 người chơi ném bóng, nếu tốc độ của người ném nhanh hơn tốc độ bắt của người bắt bóng
+thì sẽ bị bắt hụt, còn nếu tốc độ của người ném bóng chậm hơn chẳng hạn, thì người bắt sẽ kiểu đứng 
+đợi lâu vc :))
+	- video trên youtube: có cái phần đỏ đỏ và cái phần xám=> phần xám xám chính là buffer
+)
+=> phải có 1 luồng đệm buffer để nhận dữ liệu để tăng tốc độ đọc và ghi
+- ngoài ra luồng buffer cũng cung cấp thêm 1 số method hay như mark(), reset()
+  
+
+VIII. ObjectInputStream/ObjectOutputStream và Serializable interface
+- Dùng để đọc ghi hẳn 1 object vào ra file ( 2 hàm readObject và writeObject)
+- Điều kiện để 1 object có thể được đọc:
++ class của object đó phải được implement từ interface Serializable
++ class của object đó phải có 1 constructor ko tham số
+- Những property, hàm, class, object bên trong class đó nếu thuộc kiểu
+transient hay kiểu static thì đối tượng được đọc/ghi ra sẽ ko có các thuộc 
+tính kiểu transient hay static đó
+
+IX. Random Access Files
+- Tất cả những luồng trước nay mà ta học thì chủ yếu là chỉ có đọc hoặc ghi
+- RandomAccessFiles cung cấp cả đọc và ghi (ảnh 10)
+    
